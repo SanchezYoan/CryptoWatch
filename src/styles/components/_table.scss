@@ -8,7 +8,7 @@
     grid-template-columns: 308px 100px 100px 120px repeat(7, 1fr);
 
     @media screen and (max-width: 1020px) {
-      grid-template-columns: 276px 80px 80px 100px repeat(7, 1fr);
+      grid-template-columns: 276px 80px 80px 100px repeat(4, 1fr);
     }
     @media screen and (max-width: 850px) {
       grid-template-columns: 276px 80px 80px 100px repeat(4, 1fr);
@@ -23,9 +23,9 @@
   .table-header {
     height: 44px;
     align-items: center;
-    width: 100%;
     z-index: 100000;
     transition: 0;
+    width: 210%;
 
     &.active {
       position: fixed;

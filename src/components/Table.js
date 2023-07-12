@@ -2,12 +2,13 @@ import React, { useState } from "react";
 
 const Table = ({ coinData }) => {
   const [rangeNumber, setRangeNumber] = useState(100);
+  const [orderBy, setOrderBy] = useState("");
   const tableHeader = [
     "Prix",
     "MarketCap",
     "Volume",
     "1h",
-    "lj",
+    "1j",
     "1m",
     "6m",
     "1a",
@@ -17,7 +18,7 @@ const Table = ({ coinData }) => {
   return (
     <div className="table-container">
       <div className="table-header">
-        <div className="rage-container">
+        <div className="range-container">
           <span>
             Top{" "}
             <input
@@ -34,8 +35,23 @@ const Table = ({ coinData }) => {
             onChange={(e) => setRangeNumber(e.target.value)}
           />
         </div>
+        {tableHeader.map((el) => (
+          <li key={el}>
+            <input
+              type="radio"
+              name="header-el"
+              id={el}
+              defaultChecked={
+                el === orderBy || el === orderBy + "reverse" ? true : false
+              }
+              //   onClick={() => {
+              //     setOrderBy(el);
+              //   }}
+            />
+            <label htmlFor={el}>{el}</label>
+          </li>
+        ))}
       </div>
-      {tableHeader.map((el) => {})}
     </div>
   );
 };
