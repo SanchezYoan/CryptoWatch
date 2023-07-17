@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import PercentChange from "./PercentChange";
 import StarIcon from "./StarIcon";
+import CoinChart from "./CoinChart";
 
 const TableLine = ({ coin, index }) => {
+  const [showChart, setShowChart] = useState(false);
   const priceFormater = (num) => {
     if (Math.round(num).toString().length < 4) {
       return new Intl.NumberFormat("us-US", {
@@ -27,8 +29,15 @@ const TableLine = ({ coin, index }) => {
           <img src="coin.image" height="20" alt="logo" />
         </div>
         <div className="infos">
-          <div className="chart-img">
+          <div
+            className="chart-img"
+            onMouseEnter={() => setShowChart(true)}
+            onMouseLeave={() => setShowChart(false)}
+          >
             <img src="./assets/chart-icon.svg" alt="chart-icon" />
+            <div className="chart-container" id={coin.name}>
+              {showChart && <CoinChart coinId={coin.id} coinName={coin.name} />}
+            </div>
           </div>
           <h4>{coin.name}</h4>
           <span>- {coin.symbol.toUpperCase()}</span>
