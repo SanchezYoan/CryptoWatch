@@ -42,7 +42,7 @@ const CoinChart = ({ coinId, coinName }) => {
         }
         setCoinData(dataArray);
       });
-  }, [duration]);
+  }, [coinId, duration]);
 
   return (
     <div className="coin-chart">
@@ -69,7 +69,7 @@ const CoinChart = ({ coinId, coinName }) => {
       >
         <defs>
           <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="7%" stopColor={colors.color2} stopOpacity={0.8} />
+            <stop offset="7%" stopColor={colors.color1} stopOpacity={0.8} />
             <stop offset="93%" stopColor={colors.white1} stopOpacity={0} />
           </linearGradient>
         </defs>
@@ -80,9 +80,9 @@ const CoinChart = ({ coinId, coinName }) => {
         <Area
           type="monotone"
           dataKey="price"
-          strokes={colors.color1}
+          stroke={colors.color1}
           fillOpacity={1}
-          full="url(#colorUv)"
+          fill="url(#colorUv)"
         />
       </AreaChart>
     </div>
