@@ -10,11 +10,10 @@ const StarIcon = ({ coinId }) => {
         setLike(true);
       }
     }
-  });
+  }, []);
 
   const idChecker = (id) => {
     let favList = null;
-
     if (window.localStorage.coinList) {
       favList = window.localStorage.coinList.split(",");
     }
@@ -32,11 +31,12 @@ const StarIcon = ({ coinId }) => {
       setLike(true);
     }
   };
+
   return (
     <img
       onClick={() => idChecker(coinId)}
       src={like ? "./assets/star-full.svg" : "./assets/star-empty.svg"}
-      alt="icon-start"
+      alt="icon-star"
     />
   );
 };

@@ -1,22 +1,23 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import {
-  Area,
   AreaChart,
-  CartesianGrid,
-  Tooltip,
   XAxis,
   YAxis,
+  CartesianGrid,
+  Tooltip,
+  Area,
 } from "recharts";
 import colors from "../styles/_settings.scss";
 
 const CoinChart = ({ coinId, coinName }) => {
-  const [duration, setDuration] = useState(30);
   const [coinData, setCoinData] = useState();
+  const [duration, setDuration] = useState(30);
   const headerData = [
     [1, "1 jour"],
     [3, "3 jours"],
     [7, "7 jours"],
+    [30, "1 mois"],
     [91, "3 mois"],
     [181, "6 mois"],
     [365, "1 an"],
@@ -25,6 +26,7 @@ const CoinChart = ({ coinId, coinName }) => {
 
   useEffect(() => {
     let dataArray = [];
+
     axios
       .get(
         `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=usd&days=${duration}${
@@ -48,15 +50,15 @@ const CoinChart = ({ coinId, coinName }) => {
     <div className="coin-chart">
       <p>{coinName}</p>
       <div className="btn-container">
-        {headerData.map((el) => {
+        {headerData.map((radio) => {
           return (
             <div
-              key={el[0]}
-              htmlFor={"btn" + el[0]}
-              onClick={() => setDuration(el[0])}
-              className={el[0] === duration ? "active-btn" : ""}
+              htmlFor={"btn" + radio[0]}
+              onClick={() => setDuration(radio[0])}
+              key={radio[0]}
+              className={radio[0] === duration ? "active-btn" : ""}
             >
-              {el[1]}
+              {radio[1]}
             </div>
           );
         })}

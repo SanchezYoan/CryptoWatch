@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Tooltip, Treemap } from "recharts";
+import { Treemap, Tooltip } from "recharts";
 import colors from "../styles/_settings.scss";
 
-const GlobalChart = ({ coinData }) => {
+const GlobalChart = ({ coinsData }) => {
   const [dataArray, setDataArray] = useState([]);
 
   const colorPicker = (number) => {
@@ -39,24 +39,25 @@ const GlobalChart = ({ coinData }) => {
   useEffect(() => {
     let chartData = [];
 
-    if (coinData && coinData.length > 0) {
+    if (coinsData.length > 0) {
       for (let i = 0; i < 45; i++) {
-        if (excludeCoin(coinData[i].symbol)) {
+        if (excludeCoin(coinsData[i].symbol)) {
           chartData.push({
             name:
-              coinData[i].symbol.toUpperCase() +
+              coinsData[i].symbol.toUpperCase() +
               " " +
-              coinData[i].price_change_percentage_24h.toFixed(1),
-            size: coinData[i].market_cap,
-            fill: colorPicker(coinData[i].price_change_percentage_24h),
+              coinsData[i].market_cap_change_percentage_24h.toFixed(1) +
+              "%",
+            size: coinsData[i].market_cap,
+            fill: colorPicker(coinsData[i].price_change_percentage_24h),
           });
         }
       }
     }
     setDataArray(chartData);
-  }, [coinData]);
+  }, [coinsData]);
 
-  const TreeToolTip = ({ active, payload }) => {
+  const TreemapTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
       return (
         <div className="custom-tooltip">
@@ -71,14 +72,14 @@ const GlobalChart = ({ coinData }) => {
     <div className="global-chart">
       <Treemap
         width={730}
-        height={180}
+        height={181}
         data={dataArray}
         dataKey="size"
-        stroke="rgb(51,51,51)"
+        stroke="rgb(51, 51, 51)"
         fill="black"
         aspectRatio="1"
       >
-        <Tooltip content={TreeToolTip} />
+        <Tooltip content={<TreemapTooltip />} />
       </Treemap>
     </div>
   );
