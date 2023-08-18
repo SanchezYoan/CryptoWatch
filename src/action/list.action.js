@@ -1,4 +1,4 @@
-export const SET_LIST_DISPLAY = "SET_LIST_DISPLAYE";
+export const SET_LIST_DISPLAY = "SET_LIST_DISPLAY";
 
 export const setListDisplay = (bool) => {
   return (dispatch) => {

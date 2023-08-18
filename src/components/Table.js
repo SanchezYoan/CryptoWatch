@@ -82,9 +82,9 @@ const Table = ({ coinsData }) => {
               let list = window.localStorage.coinList.split(",");
               if (list.includes(coin.id)) {
                 return coin;
-              } else {
-                return coin;
               }
+            } else {
+              return coin;
             }
           })
           .sort((a, b) => {
